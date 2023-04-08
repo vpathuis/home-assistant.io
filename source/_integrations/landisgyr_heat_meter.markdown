@@ -27,18 +27,17 @@ The device is read through the optical interface. An (USB) IR reader is needed a
 
 The integration will create the following sensors:
 
-- Heat usage (MWh)
+- Heat usage (MWh or GJ)
 - Volume usage (m3)
 
-To be compatible with the Home Assistant energy units of measurement, heat usage is converted to MWh, from usage in GJ, which is supplied by the device, using a conversion factor: 1 GJ = 0.277778 MWh.
+Depending on your device type, heat usage is read as GJ or MWh.
 
 Further data that is read from the device is added as diagnostic entities:
 
-- Heat usage measured in GJ, as is read from the device before conversion
+- Heat usage measured (GJ or MWh, depending on device type)
 - Ownership number
 - Volume previous year (m3)
-- Heat previous year (MWh)
-- Heat previous year (GJ)
+- Heat previous year (GJ or MWh, depending on device type)
 - Error number
 - Device number
 - Measurement period minutes
@@ -62,17 +61,19 @@ Further data that is read from the device is added as diagnostic entities:
 
 ## Energy Dashboard
 
-Either heat usage or volume usage can be used as "Gas" on the energy dashboard. If you want to supply a price per MWh, make sure to apply the conversion factor first.
+Either heat usage or volume usage can be used as "Gas" on the energy dashboard. 
 
 ## Polling the device
 
-Polling is by default done only once per day (and once right after adding the integration). Every time the Heat Meter values are read, battery time of the device will (supposedly) go down by about 30 minutes.
+Polling is by default done on restart and once per day. Every time the Heat Meter values are read, battery time of the device will (supposedly) go down by approximately 30 minutes.
 
 For detailed control on polling and time of polling, consider disabling polling in the integration panel and poll manually. For instructions, see below.
 
 ### Polling manually (optional)
 
-For detailed control on when the device is polled, disable the default polling for this integration and create an automation that will update one of the entities (the other entities will be updated as well)
+For detailed control on when the device is polled, disable the default polling for this integration and create an automation that will update one of the entities (the other entities will be updated as well).
+
+![lg-automation-sm](https://user-images.githubusercontent.com/48653141/230714857-ebe79561-2d16-4dfb-9ff9-b01cdccca2e2.png)
 
 If you're comfortable with YAML, this code could be used:
 
